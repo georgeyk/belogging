@@ -10,7 +10,7 @@ DEFAULT_LOGGING_CONF = {
     },
     'filters': {
         'logger_filter': {
-            '()': 'filters.LoggerFilter',
+            '()': 'belogging.filters.LoggerFilter',
         },
     },
     'handlers': {
