@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+# vi:si:et:sw=4:sts=4:ts=4
+
 import logging
 import logging.config
 
-from defaults import DEFAULT_LOGGING_CONF, DEFAULT_KVP_FORMAT, LEVEL_MAP
+from .defaults import DEFAULT_LOGGING_CONF, DEFAULT_KVP_FORMAT, LEVEL_MAP
 
 
 class BeloggingLoader:

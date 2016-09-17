@@ -4,7 +4,7 @@
 import os
 import logging
 
-from defaults import LEVEL_MAP
+from .defaults import LEVEL_MAP
 
 
 class LoggerFilter(logging.Filter):
@@ -27,7 +27,8 @@ class LoggerFilter(logging.Filter):
         for key in self.logger_keys:
             size = len(key)
             if record.name.find(key, 0, size) != 0:
-                return False
+                continue
+
             if record.name[size] == '.':
                 return True
 
