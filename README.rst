@@ -23,6 +23,7 @@ Examples:
 ---------
 
 Simple applications:
+~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
@@ -43,12 +44,52 @@ Executing:
 
     # selecting LOG_LEVEL
     $ LOG_LEVEL=DEBUG python my_script.py
+    # level=DEBUG message=test 1
+    # level=INFO message=test 2
 
     # selecting LOGGERS
     $ LOGGERS=foobar python my_script.py
+    # Both messages
 
     # Both
     $ LOGGERS=foobar LOG_LEVEL=INFO my_script.py
+    # only level=INFO message=test 2
+
+
+Other applications should call ```belogging.load()``` upon initialization.
+The first ```__init__.py``` would be a good candidate, but anything before any call to
+```logging``` module will be fine.
+
+
+Django:
+~~~~~~~
+
+
+In your projects ```settings.py```:
+
+.. code-block:: python
+
+    import belogging
+    # ... settings ...
+    LOGGING = belogging.load()
+
+
+Inside your code, just use ```logging.getLogger()``` as usual.
+
+.. code-block:: bash
+
+    $ export LOG_LEVEL=WARNING
+    $ ./manage.py runserver
+    # It will output only logging messages with severity > WARNING
+
+
+Logging follows a hierarchy, so you might want to always select which logs you want to see:
+
+
+.. code-block:: bash
+
+    $ export LOGGERS=my_app.critical_a,my_app.critical_c,my_lib
+    # "my_app.critical_b messages" will be skipped
 
 
 Note:
