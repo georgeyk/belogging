@@ -83,13 +83,15 @@ Inside your code, just use ```logging.getLogger()``` as usual.
     # It will output only logging messages with severity > WARNING
 
 
-Logging follows a hierarchy, so you might want to always select which logs you want to see:
+Logging follows a hierarchy, so you easily select or skip some logging messages:
 
 
 .. code-block:: bash
 
     $ export LOGGERS=my_app.critical_a,my_app.critical_c,my_lib
+    $ ./my-app.py
     # "my_app.critical_b messages" will be skipped
+    # all messages from my_lib will show up
 
 
 Note:
