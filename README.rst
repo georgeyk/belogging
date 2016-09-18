@@ -22,32 +22,33 @@ Requirements:
 Examples:
 ---------
 
-Simple applications::
+Simple applications:
 
-    ```python
+.. code-block:: python
 
-        import logging
-        import belogging
-        belogging.load()
+    # my_script.py
 
-        logger = logging.getLogger('foobar')
-        logger.debug('test 1')
-        logger.info('test 2')
+    import logging
+    import belogging
+    belogging.load()
 
-    ```
+    logger = logging.getLogger('foobar')
+    logger.debug('test 1')
+    logger.info('test 2')
 
-Executing::
 
-    ```bash
-        # using LOG_LEVEL
-        LOG_LEVEL=DEBUG python my_script.py
+Executing:
 
-        # using LOGGERS
-        LOGGERS=foobar python my_script.py
+.. code-block:: bash
 
-        # Both
-        LOGGERS=foobar LOG_LEVEL=INFO my_script.py
-    ```
+    # selecting LOG_LEVEL
+    $ LOG_LEVEL=DEBUG python my_script.py
+
+    # selecting LOGGERS
+    $ LOGGERS=foobar python my_script.py
+
+    # Both
+    $ LOGGERS=foobar LOG_LEVEL=INFO my_script.py
 
 
 Note:
