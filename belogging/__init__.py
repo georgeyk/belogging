@@ -4,9 +4,6 @@
 from .loader import BeloggingLoader
 
 
-__version__ = '0.0.1'
-
-
 # Sugar
 
 def load(**options):

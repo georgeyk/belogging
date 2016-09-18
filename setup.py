@@ -10,7 +10,7 @@ from setuptools import setup, find_packages, Command
 
 here = os.path.abspath(os.path.dirname(__file__))
 
-with codecs.open(os.path.join(here, 'belogging/__init__.py'), encoding='utf-8') as f:
+with codecs.open(os.path.join(here, 'belogging/__version__.py'), encoding='utf-8') as f:
     # this adds __version__ to setup.py
     exec(f.read())
 
