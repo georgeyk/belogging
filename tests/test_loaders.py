@@ -3,16 +3,15 @@
 
 from unittest import mock
 
+from belogging import load
 from belogging.loader import BeloggingLoader
 
 
 def test_loader_init():
-    loader = BeloggingLoader(log_format='%(foobar)s')
-    assert loader.config['formatters']['default']['format'] == '%(foobar)s'
-
     with mock.patch('logging.captureWarnings') as mocked_logging:
-        loader = BeloggingLoader(capture_warnings=False)
+        BeloggingLoader(capture_warnings=False)
         assert mocked_logging.called
+        mocked_logging.assert_called_once_with(False)
 
 
 def test_update_default_formatter():
@@ -27,3 +26,13 @@ def test_setup():
         configured = loader.setup()
         assert configured
         assert mocked_config.called
+
+
+#
+# load sugar
+#
+
+
+def test_load_log_format():
+    configured = load(log_format='%(foobar)s')
+    assert configured['formatters']['default']['format'] == '%(foobar)s'
