@@ -4,14 +4,21 @@
 from unittest import mock
 
 from belogging import load
+from belogging.defaults import DEFAULT_KVP_FORMAT
 from belogging.loader import BeloggingLoader
 
 
 def test_loader_init():
     with mock.patch('logging.captureWarnings') as mocked_logging:
-        BeloggingLoader(capture_warnings=False)
+        loader = BeloggingLoader(capture_warnings=False)
+        assert loader.config['formatters']['default']['format'] == DEFAULT_KVP_FORMAT
         assert mocked_logging.called
         mocked_logging.assert_called_once_with(False)
+
+
+def test_without_kvp_format():
+    loader = BeloggingLoader(use_default_kvp=False)
+    assert loader.config['formatters']['default']['format'] != DEFAULT_KVP_FORMAT
 
 
 def test_update_default_formatter():
