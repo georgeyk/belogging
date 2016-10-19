@@ -6,6 +6,10 @@ from .loader import BeloggingLoader
 
 # Sugar
 
-def load(**options):
+def load(log_format=None, **options):
     loader = BeloggingLoader(**options)
+
+    if log_format is not None:
+        loader.update_default_formatter(log_format)
+
     return loader.setup()

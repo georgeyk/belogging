@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # vi:si:et:sw=4:sts=4:ts=4
 
+from copy import deepcopy
 import logging
 import logging.config
 
@@ -8,14 +9,12 @@ from .defaults import DEFAULT_LOGGING_CONF, DEFAULT_KVP_FORMAT, LEVEL_MAP
 
 
 class BeloggingLoader:
-    _config = DEFAULT_LOGGING_CONF
 
-    def __init__(self, capture_warnings=True, log_format=None,
-                 use_default_kvp=True):
+    def __init__(self, capture_warnings=True, use_default_kvp=True):
+        self._config = deepcopy(DEFAULT_LOGGING_CONF)
+
         if use_default_kvp:
             self.update_default_formatter(DEFAULT_KVP_FORMAT)
-        if log_format is not None:
-            self.update_default_formatter(log_format)
 
         # Custom level to suppress handlers
         logging.addLevelName('DISABLED', LEVEL_MAP['DISABLED'])
