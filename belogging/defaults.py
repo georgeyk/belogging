@@ -11,7 +11,7 @@ DEFAULT_LOGGING_CONF = {
         },
     },
     'handlers': {
-        'console': {
+        'default': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'default',
@@ -22,7 +22,7 @@ DEFAULT_LOGGING_CONF = {
         },
     },
     'root': {
-        'handlers': ['console'],
+        'handlers': ['default'],
         'level': 'DEBUG',
     },
     'loggers': {},
