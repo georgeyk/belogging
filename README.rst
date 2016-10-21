@@ -1,6 +1,8 @@
 Belogging
 =========
 
+*Don't fight with logging ...*
+
 |TravisCI Build Status| |Coverage Status|
 
 ----
@@ -29,11 +31,12 @@ Simple applications:
 
     # my_script.py
 
-    import logging
     import belogging
-    belogging.load()
+    belogging.load()  # this call is optional, only useful for customization
 
-    logger = logging.getLogger('foobar')
+    # belogging.getLogger is just a sugar to logging.getLogger, you can
+    # use logging.getLogger as usual (and recommended).
+    logger = belogging.getLogger('foobar')
     logger.debug('test 1')
     logger.info('test 2')
 
@@ -56,7 +59,7 @@ Executing:
     # only level=INFO message=test 2
 
 
-Other applications should call ```belogging.load()``` upon initialization.
+Applications should call ```belogging.load()``` upon initialization.
 The first ```__init__.py``` would be a good candidate, but anything before any call to
 ```logging``` module will be fine.
 
@@ -97,7 +100,7 @@ Logging follows a hierarchy, so you easily select or skip some logging messages:
 Note:
 -----
 
-If you are developing a library you should not configure the logging.
+If you are developing a library you should not configure logging.
 Applications configure it, libraries only "log" messages.
 
 

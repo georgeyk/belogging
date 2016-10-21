@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# vi:si:et:sw=4:sts=4:ts=4
-
 
 DEFAULT_LOGGING_CONF = {
     'version': 1,
@@ -10,11 +7,11 @@ DEFAULT_LOGGING_CONF = {
     },
     'filters': {
         'logger_filter': {
-            '(,)': 'belogging.filters.LoggerFilter',
+            '()': 'belogging.filters.LoggerFilter',
         },
     },
     'handlers': {
-        'console': {
+        'default': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
             'formatter': 'default',
@@ -25,7 +22,7 @@ DEFAULT_LOGGING_CONF = {
         },
     },
     'root': {
-        'handlers': ['console'],
+        'handlers': ['default'],
         'level': 'DEBUG',
     },
     'loggers': {},
