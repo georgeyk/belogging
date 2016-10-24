@@ -57,3 +57,13 @@ def test_setup():
 def test_load_log_format():
     configured = load(log_format='%(foobar)s')
     assert configured['formatters']['default']['format'] == '%(foobar)s'
+
+
+def test_enable_duplication_filter_default():
+    configured = load()
+    assert 'logger_duplication' not in configured['filters']
+
+
+def test_enable_duplication_filter():
+    configured = load(enable_duplication_filter=True)
+    assert 'logger_duplication' in configured['filters']
