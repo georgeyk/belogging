@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-# vi:si:et:sw=4:sts=4:ts=4
-
 from unittest import mock
+
+import pytest
 
 from belogging import load
 from belogging.defaults import DEFAULT_KVP_FORMAT
+from belogging.exceptions import ConfigurationWarning
 from belogging.loader import BeloggingLoader
 
 
@@ -25,6 +25,20 @@ def test_update_default_formatter():
     loader = BeloggingLoader()
     loader.update_default_formatter('%(foobar)s')
     assert loader.config['formatters']['default']['format'] == '%(foobar)s'
+
+
+def test_add_filter():
+    loader = BeloggingLoader()
+    loader.add_filter('foobar', 'whatever.path.ToFilter')
+    assert 'foobar' in loader.config['filters']
+    assert 'foobar' in loader.config['handlers']['default']['filters']
+
+
+def test_add_filter_twice():
+    loader = BeloggingLoader()
+    loader.add_filter('foobar', 'whatever.path.ToFilter')
+    with pytest.raises(ConfigurationWarning):
+        loader.add_filter('foobar', 'whatever.path.ToFilter')
 
 
 def test_setup():
