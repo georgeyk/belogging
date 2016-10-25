@@ -55,7 +55,7 @@ setup(
     download_url='https://github.com/georgeyk/belogging/releases',
     license='MIT',
     author='George Y. Kussumoto',
-    author_email='contato at georgeyk dot com dot br',
+    author_email='contato@georgeyk.com.br',
     packages=find_packages(exclude=['docs', 'tests', 'tests.*', 'requirements*']),
     classifiers=[
         'Development Status :: 4 - Beta',
