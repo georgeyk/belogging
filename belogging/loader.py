@@ -3,6 +3,7 @@ import logging
 import logging.config
 
 from .defaults import DEFAULT_LOGGING_CONF, DEFAULT_KVP_FORMAT, LEVEL_MAP
+from .exceptions import ConfigurationWarning
 
 
 class BeloggingLoader:
@@ -23,6 +24,15 @@ class BeloggingLoader:
 
     def update_default_formatter(self, format_string):
         self.config['formatters']['default']['format'] = format_string
+
+    def add_filter(self, filter_name, filter_path):
+        ft = {filter_name: {'()': filter_path}}
+        if filter_name in self.config['filters']:
+            msg = '"{}" already configured and not overwritten'.format(filter_name)
+            raise ConfigurationWarning(msg)
+
+        self.config['filters'].update(ft)
+        self.config['handlers']['default']['filters'].append(filter_name)
 
     def setup(self):
         logging.config.dictConfig(self.config)

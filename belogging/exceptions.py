@@ -1,0 +1,3 @@
+
+class ConfigurationWarning(RuntimeWarning):
+    pass

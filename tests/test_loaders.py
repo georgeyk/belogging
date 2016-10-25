@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-# vi:si:et:sw=4:sts=4:ts=4
-
 from unittest import mock
+
+import pytest
 
 from belogging import load
 from belogging.defaults import DEFAULT_KVP_FORMAT
+from belogging.exceptions import ConfigurationWarning
 from belogging.loader import BeloggingLoader
 
 
@@ -27,6 +27,20 @@ def test_update_default_formatter():
     assert loader.config['formatters']['default']['format'] == '%(foobar)s'
 
 
+def test_add_filter():
+    loader = BeloggingLoader()
+    loader.add_filter('foobar', 'whatever.path.ToFilter')
+    assert 'foobar' in loader.config['filters']
+    assert 'foobar' in loader.config['handlers']['default']['filters']
+
+
+def test_add_filter_twice():
+    loader = BeloggingLoader()
+    loader.add_filter('foobar', 'whatever.path.ToFilter')
+    with pytest.raises(ConfigurationWarning):
+        loader.add_filter('foobar', 'whatever.path.ToFilter')
+
+
 def test_setup():
     loader = BeloggingLoader()
     with mock.patch('logging.config.dictConfig') as mocked_config:
@@ -43,3 +57,13 @@ def test_setup():
 def test_load_log_format():
     configured = load(log_format='%(foobar)s')
     assert configured['formatters']['default']['format'] == '%(foobar)s'
+
+
+def test_enable_duplication_filter_default():
+    configured = load()
+    assert 'logger_duplication' not in configured['filters']
+
+
+def test_enable_duplication_filter():
+    configured = load(enable_duplication_filter=True)
+    assert 'logger_duplication' in configured['filters']
