@@ -73,8 +73,9 @@ In your projects ```settings.py```:
 .. code-block:: python
 
     import belogging
-    # ... settings ...
-    LOGGING = belogging.load()
+    # Disable django logging setup
+    LOGGING_CONFIG = None
+    belogging.load()
 
 
 Inside your code, just use ```logging.getLogger()``` as usual.
