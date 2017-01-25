@@ -29,7 +29,7 @@ DEFAULT_LOGGING_CONF = {
 }
 
 
-DEFAULT_KVP_FORMAT = 'asctime=%(asctime)s level=%(levelname)s module=%(module)s line=%(lineno)s message=%(message)s'
+DEFAULT_KVP_FORMAT = 'asctime=%(asctime)s level=%(levelname)s pathname=%(pathname)s line=%(lineno)s message=%(message)s'
 
 
 LEVEL_MAP = {'DISABLED': 60,
