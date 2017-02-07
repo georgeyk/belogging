@@ -31,6 +31,8 @@ DEFAULT_LOGGING_CONF = {
 
 DEFAULT_KVP_FORMAT = 'asctime=%(asctime)s level=%(levelname)s pathname=%(pathname)s line=%(lineno)s message=%(message)s'
 
+DEFAULT_JSON_FORMAT = '%(asctime)s %(levelname)s %(pathname)s %(lineno)s %(process)s %(processName)s %(thread)s %(threadName)s %(name)s %(message)s'
+
 
 LEVEL_MAP = {'DISABLED': 60,
              'CRITICAL': 50,
