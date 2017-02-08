@@ -10,7 +10,7 @@ from .exceptions import ConfigurationWarning
 
 class BeloggingLoader:
 
-    def __init__(self, capture_warnings=True, use_default_kvp=True, json=True):
+    def __init__(self, capture_warnings=True, use_default_kvp=True, json=False):
         self._config = deepcopy(DEFAULT_LOGGING_CONF)
 
         if use_default_kvp:
