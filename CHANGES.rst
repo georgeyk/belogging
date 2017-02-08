@@ -1,3 +1,10 @@
+0.1.0
+-----
+
+* Add JSON formatter
+* Minor improvements
+
+
 0.0.2
 -----
 
