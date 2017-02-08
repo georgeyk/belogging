@@ -27,6 +27,13 @@ def test_update_default_formatter():
     assert loader.config['formatters']['default']['format'] == '%(foobar)s'
 
 
+def test_enable_json():
+    loader = BeloggingLoader(json=True)
+    assert 'json' in loader.config['formatters']
+    assert loader.config['formatters']['json']
+    assert loader.config['handlers']['default']['formatter'] == 'json'
+
+
 def test_add_filter():
     loader = BeloggingLoader()
     loader.add_filter('foobar', 'whatever.path.ToFilter')
