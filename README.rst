@@ -14,11 +14,16 @@ Features:
     * Set logging level using environment variable LOG_LEVEL (defaults to 'INFO')
     * Set which loggers to enable using environment variable LOGGERS (defaults to '', everything)
     * Always output to stdout
+    * Optional JSON formatter
     * Completely disable logging setting LOG_LEVEL=DISABLED
 
 Requirements:
 
     * Python 3.5 and beyond
+
+Install:
+
+    `pip install belogging`
 
 
 Examples:
@@ -32,7 +37,9 @@ Simple applications:
     # my_script.py
 
     import belogging
-    belogging.load()  # this call is optional, only useful for customization
+    belogging.load()
+    # ^^ this call is optional, only useful for customization
+    # For example, to enable JSON output: belogging.load(json=True)
 
     # belogging.getLogger is just a sugar to logging.getLogger, you can
     # use logging.getLogger as usual (and recommended).
@@ -96,13 +103,6 @@ Logging follows a hierarchy, so you easily select or skip some logging messages:
     $ ./my-app.py
     # "my_app.critical_b messages" will be skipped
     # all messages from my_lib will show up
-
-
-Note:
------
-
-If you are developing a library you should not configure logging.
-Applications configure it, libraries only "log" messages.
 
 
 .. |TravisCI Build Status| image:: https://travis-ci.org/georgeyk/belogging.svg?branch=master
