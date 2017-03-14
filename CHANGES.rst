@@ -1,3 +1,8 @@
+0.1.1
+-----
+
+* Workaround to prevent KeyError exception in LoggerDuplicationFilter
+
 0.1.0
 -----
 
