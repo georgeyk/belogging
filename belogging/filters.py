@@ -65,7 +65,9 @@ class LoggerDuplicationFilter(logging.Filter):
         if len(self._cache) >= self._cache_size:
             # oldest key with less hits
             key, _ = sorted(self._cache.items(), key=lambda t: t[1]['hits'])[0]
-            self._cache.pop(key)
+            # FIXME: it seems that `dict.pop` have issues in concurrent scenarios, raising
+            #        KeyError once in while. It needs further investigation though.
+            self._cache.pop(key, None)
 
         self._cache[record.msg] = {'time': datetime.utcnow(), 'hits': 0}
         return True
