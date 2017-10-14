@@ -1,3 +1,9 @@
+0.1.2
+-----
+
+* Add missing tests asserts
+* Add lock for dealing with OrderedDict self._cache
+
 0.1.1
 -----
 

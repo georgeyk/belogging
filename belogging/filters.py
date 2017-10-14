@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from datetime import datetime
+from threading import Lock
 import os
 import logging
 
@@ -38,6 +39,8 @@ class LoggerFilter(logging.Filter):
 class LoggerDuplicationFilter(logging.Filter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.lock = Lock()
+
         self._cache_size = int(os.getenv('LOG_CACHE_SIZE', 32))
         if self._cache_size <= 0:
             msg = 'LOG_CACHE_SIZE must be greater than 0, found={}'.format(self._cache_size)
@@ -51,23 +54,24 @@ class LoggerDuplicationFilter(logging.Filter):
         self._cache = OrderedDict({})
 
     def filter(self, record):
-        if record.msg in self._cache:
-            now = datetime.utcnow()
-            delta = now - self._cache[record.msg]['time']
-            if delta.seconds >= self._cache_expire:
-                self._cache[record.msg]['time'] = now
-                self._cache[record.msg]['hits'] = 10
-                return True
+        with self.lock:
+            if record.msg in self._cache:
+                now = datetime.utcnow()
+                delta = now - self._cache[record.msg]['time']
+                if delta.seconds >= self._cache_expire:
+                    self._cache[record.msg]['time'] = now
+                    self._cache[record.msg]['hits'] = 10
+                    return True
 
-            self._cache[record.msg]['hits'] += 1
-            return False
+                self._cache[record.msg]['hits'] += 1
+                return False
 
         if len(self._cache) >= self._cache_size:
             # oldest key with less hits
-            key, _ = sorted(self._cache.items(), key=lambda t: t[1]['hits'])[0]
-            # FIXME: it seems that `dict.pop` have issues in concurrent scenarios, raising
-            #        KeyError once in while. It needs further investigation though.
-            self._cache.pop(key, None)
+            with self.lock:
+                key, _ = sorted(self._cache.items(), key=lambda t: t[1]['hits'])[0]
+                self._cache.pop(key, None)
 
-        self._cache[record.msg] = {'time': datetime.utcnow(), 'hits': 0}
+        with self.lock:
+            self._cache[record.msg] = {'time': datetime.utcnow(), 'hits': 0}
         return True

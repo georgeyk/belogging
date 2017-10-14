@@ -118,3 +118,16 @@ def test_duplication_filter_cache_size(monkeypatch):
     assert ft.filter(create_record(msg='repeated 1')) is True
     assert ft.filter(create_record(msg='repeated 2')) is True
     assert ft.filter(create_record(msg='repeated 2')) is False
+
+
+def test_cache_iteration(monkeypatch):
+    monkeypatch.setenv('LOG_CACHE_SIZE', 2)
+
+    ft = LoggerDuplicationFilter()
+    ft.filter(create_record(msg='first item'))
+    ft.filter(create_record(msg='second item'))
+
+    # This call has no lock, so it raises the RuntimeError
+    with pytest.raises(RuntimeError):
+        for _ in ft._cache.items():
+            ft.filter(create_record(msg='third item'))
