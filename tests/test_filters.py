@@ -78,9 +78,9 @@ def test_filter_level_unset(monkeypatch):
 
 def test_default_duplication_filter():
     ft = LoggerDuplicationFilter()
-    ft.filter(create_record(msg='repeated')) is True
-    ft.filter(create_record(msg='repeated')) is False
-    ft.filter(create_record(msg='not repeated')) is True
+    assert ft.filter(create_record(msg='repeated')) is True
+    assert ft.filter(create_record(msg='repeated')) is False
+    assert ft.filter(create_record(msg='not repeated')) is True
 
 
 @pytest.mark.slow
@@ -100,21 +100,34 @@ def test_duplication_filter_respect_expire_time_and_cache_size(monkeypatch):
     monkeypatch.setenv('LOG_CACHE_EXPIRE', 1)
 
     ft = LoggerDuplicationFilter()
-    ft.filter(create_record(msg='repeated 1')) is True
-    ft.filter(create_record(msg='repeated 2')) is True
-    ft.filter(create_record(msg='repeated 1')) is False
-    ft.filter(create_record(msg='repeated 2')) is False
+    assert ft.filter(create_record(msg='repeated 1')) is True
+    assert ft.filter(create_record(msg='repeated 2')) is True
+    assert ft.filter(create_record(msg='repeated 1')) is False
+    assert ft.filter(create_record(msg='repeated 2')) is False
     time.sleep(1)
-    ft.filter(create_record(msg='repeated 1')) is True
-    ft.filter(create_record(msg='repeated 2')) is True
+    assert ft.filter(create_record(msg='repeated 1')) is True
+    assert ft.filter(create_record(msg='repeated 2')) is True
 
 
 def test_duplication_filter_cache_size(monkeypatch):
     monkeypatch.setenv('LOG_CACHE_SIZE', 1)
 
     ft = LoggerDuplicationFilter()
-    ft.filter(create_record(msg='repeated 1')) is True
-    ft.filter(create_record(msg='repeated 2')) is True
-    ft.filter(create_record(msg='repeated 1')) is True
-    ft.filter(create_record(msg='repeated 2')) is True
-    ft.filter(create_record(msg='repeated 2')) is False
+    assert ft.filter(create_record(msg='repeated 1')) is True
+    assert ft.filter(create_record(msg='repeated 2')) is True
+    assert ft.filter(create_record(msg='repeated 1')) is True
+    assert ft.filter(create_record(msg='repeated 2')) is True
+    assert ft.filter(create_record(msg='repeated 2')) is False
+
+
+def test_cache_iteration(monkeypatch):
+    monkeypatch.setenv('LOG_CACHE_SIZE', 2)
+
+    ft = LoggerDuplicationFilter()
+    ft.filter(create_record(msg='first item'))
+    ft.filter(create_record(msg='second item'))
+
+    # This call has no lock, so it raises the RuntimeError
+    with pytest.raises(RuntimeError):
+        for _ in ft._cache.items():
+            ft.filter(create_record(msg='third item'))
