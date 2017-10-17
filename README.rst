@@ -3,7 +3,7 @@ Belogging
 
 *Don't fight with logging ...*
 
-|TravisCI Build Status| |Coverage Status|
+|TravisCI Build Status| |Coverage Status| |PyPI Version| |PyPI License| |PyPI latest|
 
 ----
 
@@ -109,3 +109,9 @@ Logging follows a hierarchy, so you easily select or skip some logging messages:
    :target: https://travis-ci.org/georgeyk/belogging
 .. |Coverage Status| image:: https://coveralls.io/repos/github/georgeyk/belogging/badge.svg?branch=master
    :target: https://coveralls.io/github/georgeyk/belogging?branch=master
+.. |PyPI Version| image:: https://img.shields.io/pypi/pyversions/belogging.svg?maxAge=2592000
+   :target: https://pypi.python.org/pypi/belogging
+.. |PyPI License| image:: https://img.shields.io/pypi/l/belogging.svg?maxAge=2592000
+   :target: https://pypi.python.org/pypi/belogging
+.. |PyPI latest| image:: https://img.shields.io/pypi/v/belogging.svg?maxAge=2592000
+   :target: https://pypi.python.org/pypi/belogging
