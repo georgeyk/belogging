@@ -43,7 +43,7 @@ with codecs.open(os.path.join(here, 'CHANGES.rst'), encoding='utf-8') as f:
 # Requirements
 
 # Unduplicated tests_requirements and requirements/test.txt
-tests_requirements = ['pytest', 'pytest-cov', 'coveralls']
+tests_requirements = ['pytest', 'pytest-cov', 'coveralls', 'tox']
 install_requirements = ['python-json-logger>=0.1.5']
 
 
@@ -69,6 +69,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
         'Topic :: System :: Logging',
     ],
     keywords='logging',

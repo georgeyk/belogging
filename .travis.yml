@@ -3,7 +3,8 @@ python:
   - "3.5"
   - "3.6"
 
+before_install: "pip install tox-travis"
 install: "python setup.py install && pip install -r requirements.txt"
 before_script: "flake8 --ignore=E501 belogging"
-script: "py.test"
+script: "tox"
 after_success: coveralls

@@ -1,5 +1,7 @@
 pytest
 pytest-cov
-flake8
 coveralls
-python-json-logger==0.1.5
+python-json-logger
+pre-commit
+flake8
+tox

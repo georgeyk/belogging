@@ -7,6 +7,7 @@ clean-pyc:
 	@find . -iname '__pycache__' -delete
 	@find . -iname '.coverage' -delete
 	@rm -rf htmlcov/
+	@rm -rf *.tox/
 
 clean-dist:
 	@rm -rf dist/
