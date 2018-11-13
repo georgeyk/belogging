@@ -8,9 +8,9 @@ from belogging.exceptions import ConfigurationWarning
 from belogging.filters import LoggerFilter, LoggerDuplicationFilter
 
 
-def create_record(name='test_logger', level='DEBUG', msg='foobar'):
+def create_record(name='test_logger', level='DEBUG', msg='foobar', args=None):
     return LogRecord(name=name, level=LEVEL_MAP[level], msg=msg, lineno=None,
-                     args=None, exc_info=None, pathname=None)
+                     args=args, exc_info=None, pathname=None)
 
 # LoggerFilter
 
@@ -81,6 +81,9 @@ def test_default_duplication_filter():
     assert ft.filter(create_record(msg='repeated')) is True
     assert ft.filter(create_record(msg='repeated')) is False
     assert ft.filter(create_record(msg='not repeated')) is True
+    assert ft.filter(create_record(msg='template %s', args=['teste'])) is True
+    assert ft.filter(create_record(msg='template %s', args=['teste'])) is False
+    assert ft.filter(create_record(msg='template %s', args=['teste2'])) is True
 
 
 @pytest.mark.slow
