@@ -17,7 +17,6 @@ repos:
     - id: detect-private-key
     - id: forbid-new-submodules
     - id: no-commit-to-branch
-      args: ['-b master']
     - id: flake8
       args: ['--exclude=docs/*,*migrations*', '--ignore=E501']
 
