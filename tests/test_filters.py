@@ -92,19 +92,19 @@ def test_message_template_duplication_filter():
 
 @pytest.mark.slow
 def test_duplication_filter_configuration_errors(monkeypatch):
-    monkeypatch.setenv('LOG_CACHE_EXPIRE', 0)
+    monkeypatch.setenv('LOG_CACHE_EXPIRE', '0')
     with pytest.raises(ConfigurationWarning):
         LoggerDuplicationFilter()
 
-    monkeypatch.setenv('LOG_CACHE_SIZE', 0)
+    monkeypatch.setenv('LOG_CACHE_SIZE', '0')
     with pytest.raises(ConfigurationWarning):
         LoggerDuplicationFilter()
 
 
 @pytest.mark.slow
 def test_duplication_filter_respect_expire_time_and_cache_size(monkeypatch):
-    monkeypatch.setenv('LOG_CACHE_SIZE', 2)
-    monkeypatch.setenv('LOG_CACHE_EXPIRE', 1)
+    monkeypatch.setenv('LOG_CACHE_SIZE', '2')
+    monkeypatch.setenv('LOG_CACHE_EXPIRE', '1')
 
     ft = LoggerDuplicationFilter()
     assert ft.filter(create_record(msg='repeated 1')) is True
@@ -117,7 +117,7 @@ def test_duplication_filter_respect_expire_time_and_cache_size(monkeypatch):
 
 
 def test_duplication_filter_cache_size(monkeypatch):
-    monkeypatch.setenv('LOG_CACHE_SIZE', 1)
+    monkeypatch.setenv('LOG_CACHE_SIZE', '1')
 
     ft = LoggerDuplicationFilter()
     assert ft.filter(create_record(msg='repeated 1')) is True
@@ -128,7 +128,7 @@ def test_duplication_filter_cache_size(monkeypatch):
 
 
 def test_cache_iteration(monkeypatch):
-    monkeypatch.setenv('LOG_CACHE_SIZE', 2)
+    monkeypatch.setenv('LOG_CACHE_SIZE', '2')
 
     ft = LoggerDuplicationFilter()
     ft.filter(create_record(msg='first item'))
