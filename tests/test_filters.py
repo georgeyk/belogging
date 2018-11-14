@@ -1,11 +1,11 @@
-from logging import LogRecord
 import time
+from logging import LogRecord
 
 import pytest
 
 from belogging.defaults import LEVEL_MAP
 from belogging.exceptions import ConfigurationWarning
-from belogging.filters import LoggerFilter, LoggerDuplicationFilter
+from belogging.filters import LoggerDuplicationFilter, LoggerFilter
 
 
 def create_record(name='test_logger', level='DEBUG', msg='foobar', args=None):

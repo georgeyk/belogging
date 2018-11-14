@@ -2,7 +2,6 @@ import logging
 
 from belogging.loader import BeloggingLoader
 
-
 loader = BeloggingLoader()
 loader.setup()
 

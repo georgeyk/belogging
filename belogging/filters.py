@@ -1,8 +1,8 @@
+import logging
+import os
 from collections import OrderedDict
 from datetime import datetime
 from threading import Lock
-import os
-import logging
 
 from .defaults import LEVEL_MAP
 from .exceptions import ConfigurationWarning
