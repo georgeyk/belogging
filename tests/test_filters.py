@@ -81,6 +81,10 @@ def test_default_duplication_filter():
     assert ft.filter(create_record(msg='repeated')) is True
     assert ft.filter(create_record(msg='repeated')) is False
     assert ft.filter(create_record(msg='not repeated')) is True
+
+
+def test_message_template_duplication_filter():
+    ft = LoggerDuplicationFilter()
     assert ft.filter(create_record(msg='template %s', args=['teste'])) is True
     assert ft.filter(create_record(msg='template %s', args=['teste'])) is False
     assert ft.filter(create_record(msg='template %s', args=['teste2'])) is True
