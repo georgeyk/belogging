@@ -55,15 +55,16 @@ class LoggerDuplicationFilter(logging.Filter):
 
     def filter(self, record):
         with self.lock:
-            if record.msg in self._cache:
+            msg = record.getMessage()
+            if msg in self._cache:
                 now = datetime.utcnow()
-                delta = now - self._cache[record.msg]['time']
+                delta = now - self._cache[msg]['time']
                 if delta.seconds >= self._cache_expire:
-                    self._cache[record.msg]['time'] = now
-                    self._cache[record.msg]['hits'] = 10
+                    self._cache[msg]['time'] = now
+                    self._cache[msg]['hits'] = 10
                     return True
 
-                self._cache[record.msg]['hits'] += 1
+                self._cache[msg]['hits'] += 1
                 return False
 
         if len(self._cache) >= self._cache_size:
@@ -73,5 +74,5 @@ class LoggerDuplicationFilter(logging.Filter):
                 self._cache.pop(key, None)
 
         with self.lock:
-            self._cache[record.msg] = {'time': datetime.utcnow(), 'hits': 0}
+            self._cache[msg] = {'time': datetime.utcnow(), 'hits': 0}
         return True
