@@ -7,7 +7,12 @@ python:
   - "3.7"
 
 before_install: "pip install tox-travis"
-install: "python setup.py install && pip install -r requirements.txt && pre-commit install"
+install: "python setup.py install && pip install -r requirements.txt"
 before_script: "flake8 --ignore=E501 belogging"
 script: "tox"
 after_success: coveralls
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.cache/pre-commit
