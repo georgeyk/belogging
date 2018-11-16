@@ -1,10 +1,10 @@
-from copy import deepcopy
 import logging
 import logging.config
+from copy import deepcopy
 
 from pythonjsonlogger.jsonlogger import JsonFormatter
 
-from .defaults import DEFAULT_LOGGING_CONF, DEFAULT_KVP_FORMAT, DEFAULT_JSON_FORMAT, LEVEL_MAP
+from .defaults import DEFAULT_JSON_FORMAT, DEFAULT_KVP_FORMAT, DEFAULT_LOGGING_CONF, LEVEL_MAP
 from .exceptions import ConfigurationWarning
 
 

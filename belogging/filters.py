@@ -1,8 +1,8 @@
+import logging
+import os
 from collections import OrderedDict
 from datetime import datetime
 from threading import Lock
-import os
-import logging
 
 from .defaults import LEVEL_MAP
 from .exceptions import ConfigurationWarning
@@ -54,8 +54,8 @@ class LoggerDuplicationFilter(logging.Filter):
         self._cache = OrderedDict({})
 
     def filter(self, record):
+        msg = record.getMessage()
         with self.lock:
-            msg = record.getMessage()
             if msg in self._cache:
                 now = datetime.utcnow()
                 delta = now - self._cache[msg]['time']
@@ -75,4 +75,5 @@ class LoggerDuplicationFilter(logging.Filter):
 
         with self.lock:
             self._cache[msg] = {'time': datetime.utcnow(), 'hits': 0}
+
         return True

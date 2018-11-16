@@ -16,8 +16,13 @@ clean-dist:
 
 clean: clean-pyc clean-dist
 
+lint:
+	pre-commit run -a -v
+
 test:
 	py.test
+
+test-ci: clean lint test
 
 dist: clean
 	python setup.py sdist

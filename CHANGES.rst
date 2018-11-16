@@ -1,3 +1,9 @@
+0.1.3
+-----
+
+* Fix duplication filter: use formatted log message to detect duplication
+  (thanks to @rodjjo)
+
 0.1.2
 -----
 
