@@ -20,7 +20,7 @@ lint:
 	pre-commit run -a -v
 
 test:
-	py.test
+	pytest
 
 test-ci: clean lint test
 
