@@ -2,7 +2,6 @@ import logging
 
 from .loader import BeloggingLoader
 
-
 # Sugar
 
 __loaded = False
