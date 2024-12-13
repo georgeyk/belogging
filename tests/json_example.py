@@ -6,5 +6,5 @@ loader = BeloggingLoader(json=True)
 loader.setup()
 
 
-logger = logging.getLogger('foo')
-logger.info('foo')
+logger = logging.getLogger("foo")
+logger.info("foo")

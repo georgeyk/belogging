@@ -13,8 +13,9 @@ def load(log_format=None, enable_duplication_filter=False, **options):
     if log_format is not None:
         loader.update_default_formatter(log_format)
     if enable_duplication_filter:
-        loader.add_filter('logger_duplication',
-                          'belogging.filters.LoggerDuplicationFilter')
+        loader.add_filter(
+            "logger_duplication", "belogging.filters.LoggerDuplicationFilter"
+        )
 
     global __loaded
     retval = loader.setup()
