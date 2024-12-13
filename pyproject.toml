@@ -53,3 +53,13 @@ src = ["src", "tests"]
 [tool.ruff.lint.isort]
 lines-between-types = 1
 lines-after-imports = 2
+
+[tool.tox]
+requires = ["tox>=4.19"]
+env_list = ["3.10", "3.11", "3.12"]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+allowlist_externals = ["make"]
+commands_pre = [["pre-commit", "install", "-f" ,"--install-hooks"]]
+commands = [["make", "test-ci"]]
