@@ -1,9 +1,8 @@
 [project]
 name = "belogging"
 dynamic = ["version"]
-description = "Belogging"
+description = "Easy and opinionated logging configuration for Python apps"
 readme = "README.rst"
-requires-python = ">=3.10"
 license = {file = "LICENSE"}
 keywords = ["logging"]
 classifiers = [
@@ -21,12 +20,13 @@ classifiers = [
 
 ]
 authors = [{name = "George Y. Kussumoto", email = "contato@georgeyk.com.br"}]
+requires-python = ">=3.10"
 dependencies = [
     "python-json-logger>=3.2.0",
 ]
 
 [project.urls]
-Repository = "https://github.com/georgeyk/belogging/"
+Github = "https://github.com/georgeyk/belogging/"
 Releases = "https://github.com/georgeyk/belogging/releases"
 
 [tool.hatch.version]
@@ -37,6 +37,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.uv]
+reinstall-package = ["belogging"]
 dev-dependencies = [
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
@@ -46,8 +47,9 @@ dev-dependencies = [
     "pre-commit>=4.0.1",
 ]
 
-[tool.hatch.build.targets.sdist]
-include = ["src/belogging", "tests"]
+[tool.ruff]
+src = ["src", "tests"]
 
-[tool.hatch.build.targets.wheel]
-packages = ["src/belogging"]
+[tool.ruff.lint.isort]
+lines-between-types = 1
+lines-after-imports = 2
