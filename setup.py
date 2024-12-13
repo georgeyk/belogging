@@ -44,7 +44,7 @@ with codecs.open(os.path.join(here, "CHANGES.rst"), encoding="utf-8") as f:
 
 # Unduplicated tests_requirements and requirements/test.txt
 tests_requirements = ["pytest", "pytest-cov", "coveralls", "tox"]
-install_requirements = ["python-json-logger>=3.2.9"]
+install_requirements = ["python-json-logger>=3.2.0"]
 
 
 # setup
