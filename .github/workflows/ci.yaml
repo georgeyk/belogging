@@ -27,7 +27,7 @@ jobs:
             python-version: 3.13
 
         - name: Install pre-commit
-          run: uv tool install pre-commit --with pre-commit-uv
+          run: uv tool install pre-commit
 
         - name: Run pre-commit
           run: uv run pre-commit run --all-files --show-diff-on-failure
