@@ -61,6 +61,4 @@ env_list = ["3.10", "3.11", "3.12"]
 [tool.tox.env_run_base]
 runner = "uv-venv-lock-runner"
 with_dev = true
-# allowlist_externals = ["make"]
-# commands_pre = [["pre-commit", "install", "-f" ,"--install-hooks"]]
 commands = [["pytest"]]
