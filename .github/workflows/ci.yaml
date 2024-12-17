@@ -37,17 +37,14 @@ jobs:
           cache-dependency-glob: "**/pyproject.toml"
 
       - name: Install tox
-        run: uv tool install --python-preference only-managed --python 3.12 tox --with tox-uv --with tox-gh
+        run: uv tool install --python-preference only-managed --python 3.12 tox --with tox-uv
 
       - name: Setup tests
         run: tox run -vv --notest --skip-missing-interpreters false
-        env:
-          TOX_GH_MAJOR_MINOR: ${{ matrix.env }}
 
       - name: Run tests
         run: tox run --skip-pkg-install
-        env:
-          TOX_GH_MAJOR_MINOR: ${{ matrix.env }}
+
 
           #install-dev:
           #  name: Verify dev env
