@@ -43,7 +43,7 @@ jobs:
         run: tox run -vv --notest --skip-missing-interpreters false
 
       - name: Run tests
-        run: tox run --skip-pkg-install
+        run: tox run --skip-pkg-install -e ${{ matrix.env }}
 
 
           #install-dev:
