@@ -11,19 +11,19 @@ Easy logging configuration based on environment variables.
 
 Features:
 
-    * Set logging level using environment variable LOG_LEVEL (defaults to 'INFO')
-    * Set which loggers to enable using environment variable LOGGERS (defaults to '', everything)
-    * Always output to stdout
-    * Optional JSON formatter
-    * Completely disable logging setting LOG_LEVEL=DISABLED
+* Set logging level using environment variable LOG_LEVEL (defaults to 'INFO')
+* Set which loggers to enable using environment variable LOGGERS (defaults to '', everything)
+* Always output to stdout
+* Optional JSON formatter
+* Completely disable logging setting LOG_LEVEL=DISABLED
 
 Requirements:
 
-    * Python 3.5 and beyond
+* Python 3.10+
 
 Install:
 
-    `pip install belogging`
+`pip install belogging`
 
 
 Examples:
