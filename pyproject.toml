@@ -54,6 +54,11 @@ src = ["src", "tests"]
 lines-between-types = 1
 lines-after-imports = 2
 
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-s -x --cov=src/belogging --cov-report=term-missing"
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')",]
+
 [tool.tox]
 requires = ["tox>=4.19"]
 env_list = ["3.10", "3.11", "3.12"]
