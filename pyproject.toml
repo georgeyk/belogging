@@ -43,7 +43,6 @@ dev-dependencies = [
     "pytest-cov>=6.0.0",
     "tox>=4.23.2",
     "tox-uv>=1.16.1",
-    "coveralls>=4.0.1",
     "pre-commit>=4.0.1",
 ]
 
