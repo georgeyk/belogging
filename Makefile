@@ -8,6 +8,7 @@ clean-pyc:
 	@find . -iname '.coverage' -delete
 	@rm -rf htmlcov/
 	@rm -rf *.tox/
+	@rm -f coverage.*
 
 clean-dist:
 	@rm -rf dist/
@@ -25,8 +26,7 @@ test:
 test-ci: clean lint test
 
 dist: clean
-	python setup.py sdist
-	python setup.py bdist_wheel
+	uv build
 
 release: dist
 	git tag `python setup.py -q version`
