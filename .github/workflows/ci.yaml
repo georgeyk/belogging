@@ -3,7 +3,7 @@ name: CI
 
 on:
   push:
-    branches: [uv-migration]
+    branches: [master]
   pull_request:
   workflow_dispatch:
 
