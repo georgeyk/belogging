@@ -70,3 +70,4 @@ jobs:
         uses: coverallsapp/github-action@v2
         with:
           debug: true
+          file: coverage.lcov
