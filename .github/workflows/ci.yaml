@@ -68,6 +68,7 @@ jobs:
         with:
           name: cov-report
           path: coverage.lcov
+          overwrite: true
 
   coverage:
     needs: tests
