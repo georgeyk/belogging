@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  FORCE_COLOR: "1" # Make tools pretty.
+  FORCE_COLOR: "1"
   PIP_DISABLE_PIP_VERSION_CHECK: "1"
   PIP_NO_PYTHON_VERSION_WARNING: "1"
 
@@ -61,3 +61,10 @@ jobs:
 
       - name: Run tests
         run: tox run --skip-pkg-install -e ${{ matrix.env }}
+
+  coverage:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
