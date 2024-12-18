@@ -71,8 +71,10 @@ jobs:
           overwrite: true
 
   coverage:
+    name: Coverage
     needs: tests
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Coverage file
         uses: actions/download-artifact@v4
@@ -82,5 +84,4 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@v2
         with:
-          debug: true
           file: coverage.lcov
