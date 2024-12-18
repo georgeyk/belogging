@@ -3,7 +3,7 @@ Belogging
 
 *Don't fight with logging ...*
 
-|TravisCI Build Status| |Coverage Status| |PyPI Version| |PyPI License| |PyPI latest|
+|Coverage Status| |PyPI Version| |PyPI License| |PyPI latest|
 
 ----
 
@@ -11,19 +11,21 @@ Easy logging configuration based on environment variables.
 
 Features:
 
-    * Set logging level using environment variable LOG_LEVEL (defaults to 'INFO')
-    * Set which loggers to enable using environment variable LOGGERS (defaults to '', everything)
-    * Always output to stdout
-    * Optional JSON formatter
-    * Completely disable logging setting LOG_LEVEL=DISABLED
+* Set logging level using environment variable LOG_LEVEL (defaults to `INFO`)
+* Set which loggers to enable using environment variable `LOGGERS` (defaults to `''`, everything)
+* Always output to stdout
+* Optional JSON formatter
+* Completely disable logging setting `LOG_LEVEL=DISABLED`
 
 Requirements:
 
-    * Python 3.5 and beyond
+* Python 3.10+
 
 Install:
 
-    `pip install belogging`
+.. code-block:: bash
+
+   pip install belogging
 
 
 Examples:
@@ -105,8 +107,6 @@ Logging follows a hierarchy, so you easily select or skip some logging messages:
     # all messages from my_lib will show up
 
 
-.. |TravisCI Build Status| image:: https://travis-ci.org/georgeyk/belogging.svg?branch=master
-   :target: https://travis-ci.org/georgeyk/belogging
 .. |Coverage Status| image:: https://coveralls.io/repos/github/georgeyk/belogging/badge.svg?branch=master
    :target: https://coveralls.io/github/georgeyk/belogging?branch=master
 .. |PyPI Version| image:: https://img.shields.io/pypi/pyversions/belogging.svg?maxAge=2592000

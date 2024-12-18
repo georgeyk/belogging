@@ -1,0 +1,87 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+env:
+  FORCE_COLOR: "1"
+  PIP_DISABLE_PIP_VERSION_CHECK: "1"
+  PIP_NO_PYTHON_VERSION_WARNING: "1"
+
+permissions: {}
+
+jobs:
+  lint:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v4
+
+        - name: Install uv
+          uses: astral-sh/setup-uv@v4
+          with:
+            python-version: 3.13
+
+        - name: Install pre-commit
+          run: uv tool install pre-commit
+
+        - name: Run pre-commit
+          run: uv run pre-commit run --all-files --show-diff-on-failure
+
+  tests:
+    name: Tests with ${{ matrix.env }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        env:
+          - "3.10"
+          - "3.11"
+          - "3.12"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          python-version: ${{ matrix.env }}
+          enable-cache: true
+          cache-dependency-glob: "**/pyproject.toml"
+
+      - name: Install tox
+        run: uv tool install tox --with tox-uv
+
+      - name: Setup tests
+        run: tox run -vv --notest --skip-missing-interpreters false -e ${{ matrix.env }}
+
+      - name: Run tests
+        run: tox run --skip-pkg-install -e ${{ matrix.env }}
+
+      - name: Coverage file
+        uses: actions/upload-artifact@v4
+        if: matrix.env == '3.12'
+        with:
+          name: cov-report
+          path: coverage.lcov
+          overwrite: true
+
+  coverage:
+    name: Coverage
+    needs: tests
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Coverage file
+        uses: actions/download-artifact@v4
+        with:
+          name: cov-report
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          file: coverage.lcov

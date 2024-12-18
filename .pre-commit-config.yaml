@@ -17,6 +17,11 @@ repos:
   - id: forbid-new-submodules
   - id: no-commit-to-branch
 
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.5.10
+  hooks:
+    - id: uv-lock
+
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.8.3
   hooks:

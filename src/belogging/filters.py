@@ -1,7 +1,7 @@
 import logging
 import os
 from collections import OrderedDict
-from datetime import datetime
+from datetime import datetime, timezone
 from threading import Lock
 
 from .defaults import LEVEL_MAP
@@ -61,7 +61,7 @@ class LoggerDuplicationFilter(logging.Filter):
         msg = record.getMessage()
         with self.lock:
             if msg in self._cache:
-                now = datetime.utcnow()
+                now = datetime.now(timezone.utc)
                 delta = now - self._cache[msg]["time"]
                 if delta.seconds >= self._cache_expire:
                     self._cache[msg]["time"] = now
@@ -78,6 +78,6 @@ class LoggerDuplicationFilter(logging.Filter):
                 self._cache.pop(key, None)
 
         with self.lock:
-            self._cache[msg] = {"time": datetime.utcnow(), "hits": 0}
+            self._cache[msg] = {"time": datetime.now(timezone.utc), "hits": 0}
 
         return True

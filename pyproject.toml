@@ -1,0 +1,68 @@
+[project]
+name = "belogging"
+dynamic = ["version"]
+description = "Easy and opinionated logging configuration for Python apps"
+readme = "README.rst"
+license = {file = "LICENSE"}
+keywords = ["logging"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Logging",
+
+]
+authors = [{name = "George Y. Kussumoto", email = "contato@georgeyk.com.br"}]
+requires-python = ">=3.10"
+dependencies = [
+    "python-json-logger>=3.2.0",
+]
+
+[project.urls]
+Github = "https://github.com/georgeyk/belogging/"
+Releases = "https://github.com/georgeyk/belogging/releases"
+
+[tool.hatch.version]
+path = "src/belogging/__init__.py"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+reinstall-package = ["belogging"]
+dev-dependencies = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "tox>=4.23.2",
+    "tox-uv>=1.16.1",
+    "pre-commit>=4.0.1",
+]
+
+[tool.ruff]
+src = ["src", "tests"]
+
+[tool.ruff.lint.isort]
+lines-between-types = 1
+lines-after-imports = 2
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-s -x --cov=src/belogging --cov-report=lcov"
+markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')",]
+
+[tool.tox]
+requires = ["tox>=4.19"]
+env_list = ["3.10", "3.11", "3.12"]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+with_dev = true
+commands = [["pytest"]]

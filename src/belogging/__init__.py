@@ -2,6 +2,10 @@ import logging
 
 from .loader import BeloggingLoader
 
+
+__version__ = "v0.2.0"
+
+
 # Sugar
 
 __loaded = False
