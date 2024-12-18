@@ -64,7 +64,7 @@ jobs:
 
       - name: Coverage file
         uses: actions/upload-artifact@v4
-        if:  ${{ matrix.env }} == '3.12'
+        if: matrix.env == '3.12'
         with:
           name: cov-report
           path: coverage.lcov
