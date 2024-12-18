@@ -56,7 +56,7 @@ lines-after-imports = 2
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-s -x --cov=src/belogging --cov-report=term-missing"
+addopts = "-s -x --cov=src/belogging --cov-report=lcov"
 markers = ["slow: marks tests as slow (deselect with '-m \"not slow\"')",]
 
 [tool.tox]
