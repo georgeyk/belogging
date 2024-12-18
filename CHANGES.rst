@@ -1,3 +1,10 @@
+0.2.0
+-----
+
+* Use uv
+* Drop support for older versions of Python
+* Add support for newer versions of Python
+
 0.1.3
 -----
 
