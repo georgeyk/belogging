@@ -1,7 +1,0 @@
-pytest
-pytest-cov
-coveralls
-python-json-logger
-pre-commit
-flake8
-tox
